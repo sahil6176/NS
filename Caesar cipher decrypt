@@ -1,0 +1,15 @@
+def caesar_decrypt(ciphertext, shift):
+    decrypted = ''
+    for char in ciphertext:
+        if char.isalpha():
+            base = ord('A') if char.isupper() else ord('a')
+            decrypted += chr((ord(char) - base - shift) % 26 + base)
+        else:
+            decrypted += char
+    return decrypted
+
+# Example usage:
+cipher_text = "Khoor Zruog"  # "Hello World" encrypted with shift = 3
+shift = 3
+plain_text = caesar_decrypt(cipher_text, shift)
+print("Decrypted text:", plain_text)
