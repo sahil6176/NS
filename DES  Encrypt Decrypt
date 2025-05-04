@@ -1,0 +1,34 @@
+b#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+// Dummy DES-like encryption (not secure, just simulates block logic)
+void simple_des_encrypt(char *input, char *output, const char *key) {
+    for (int i = 0; i < 8; i++) {
+        output[i] = input[i] ^ key[i];  // Simple XOR
+    }
+}
+
+void simple_des_decrypt(char *input, char *output, const char *key) {
+    for (int i = 0; i < 8; i++) {
+        output[i] = input[i] ^ key[i];  // XOR again reverses it
+    }
+}
+
+int main() {
+    char key[9] = "8bytekey";         // 8-byte key
+    char plaintext[9] = "OpenAI!!";   // 8-byte plaintext
+    char encrypted[9] = {0};
+    char decrypted[9] = {0};
+
+    simple_des_encrypt(plaintext, encrypted, key);
+    printf("Encrypted: ");
+    for (int i = 0; i < 8; i++)
+        printf("%02X ", (unsigned char)encrypted[i]);
+    printf("\n");
+
+    simple_des_decrypt(encrypted, decrypted, key);
+    printf("Decrypted: %s\n", decrypted);
+
+    return 0;
+}
