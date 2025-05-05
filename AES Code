@@ -1,0 +1,15 @@
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad, unpad
+import binascii
+
+key = b'0123456789abcdef'  # 16-byte key for AES-128
+data = b'Hello123'
+
+cipher = AES.new(key, AES.MODE_ECB)
+
+padded_data = pad(data, AES.block_size)
+encrypted_data = cipher.encrypt(padded_data)
+print("Encrypted data:", binascii.hexlify(encrypted_data).decode())
+
+decrypted_data = unpad(cipher.decrypt(encrypted_data), AES.block_size)
+print("Decrypted data:", decrypted_data.decode())
